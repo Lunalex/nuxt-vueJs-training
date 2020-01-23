@@ -1,5 +1,6 @@
 
 export default {
+  // using spa to not have a server running but for actual prod would probably use 'universal'
   mode: 'spa',
   /*
   ** Headers of the page

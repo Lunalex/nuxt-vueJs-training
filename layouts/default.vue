@@ -1,8 +1,19 @@
 <template>
   <div>
+    <navbar />
     <nuxt />
   </div>
 </template>
+
+<script>
+import Navbar from '~/components/Navbar.vue'
+export default {
+  components: {
+    Navbar
+  }
+}
+</script>
+
 
 <style>
 html {
@@ -52,4 +63,19 @@ html {
   color: #fff;
   background-color: #35495e;
 }
+
+.showComponent {
+  background-color: yellow;
+  border: solid 2px black; 
+}
+
+.component-card-standard {
+  background-color: #25a1b7;
+  box-shadow: -3px -1px 7px 1px #25a1b7;
+  color: whitesmoke;
+  border-radius: 12px;
+  padding: 20px 0;
+  margin: 5px 5px;
+}
+
 </style>
