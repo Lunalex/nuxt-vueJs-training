@@ -2,7 +2,9 @@
 export default {
   // not using the server-side implemented in 'universal'yet but still seems 
   // the most relevant solution to have fast-loading pages & good SEO
-  mode: 'universal',
+  // actually restored the original 'spa' as I was afraid to ahve issues wimply changing the string below... 
+  // not sure what to choose anymore...
+  mode: 'spa',
   /*
   ** Headers of the page
   */
