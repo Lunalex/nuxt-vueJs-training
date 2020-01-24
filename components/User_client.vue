@@ -1,15 +1,17 @@
 <template>
-  <div class="component-card-standard">
-    <div class="row justify-content-center">
-      <h2 class="text-center">Client</h2>
-    </div>
-    <div class="row justify-content-around">
-      <div class="col-5 parameter-name">Company:</div>
-      <div class="col-5 parameter-value">Lunatech</div>
-    </div>
-    <div class="row justify-content-around">
-      <div class="col-5 parameter-name">Current Projects:</div>
-      <div class="col-5 parameter-value">5</div>
-    </div>
-  </div>
+  <b-row class="component-card-standard">
+    <b-col>
+      <b-row>
+        <b-col align-self="center"><h2>Client</h2></b-col>
+      </b-row>
+      <b-row cols="3" align-h="around" align-v="start">
+        <b-col class="parameter-name">Client:</b-col>
+        <b-col class="parameter-value">Lunatech</b-col>
+      </b-row>
+      <b-row cols="3" align-h="around" align-v="start">
+        <b-col class="parameter-name">Projects:</b-col>
+        <b-col class="parameter-value">3</b-col>
+      </b-row>
+    </b-col>
+  </b-row>
 </template>

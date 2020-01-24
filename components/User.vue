@@ -1,23 +1,21 @@
 <template>
-  <div class="component-card-standard">
-    <div class="row justify-content-center">
-      <h2 class="col text-center">User</h2>
-    </div>
-    <div class="row justify-content-around">
-      <div class="col-5 parameter-name">Name:</div>
-      <div class="col-5 parameter-value">Dupond</div>
-    </div>
-    <div class="row justify-content-around">
-      <div class="col-5 parameter-name">Firstname:</div>
-      <div class="col-5 parameter-value">Marcel</div>
-    </div>
-    <div class="row justify-content-around">
-      <div class="col-5 parameter-name">Email:</div>
-      <div class="col-5 parameter-value">marcel.dupond@gmail.com</div>
-    </div>
-    <div class="row justify-content-around">
-      <div class="col-5 parameter-name">Inscription:</div>
-      <div class="col-5 parameter-value">01/01/2020</div>
-    </div>
-  </div>
+  <b-row class="component-card-standard">
+    <b-col>
+      <b-row>
+        <b-col align-self="center"><h2>User</h2></b-col>
+      </b-row>
+      <b-row cols="3" align-h="around">
+        <b-col class="parameter-name">Name:</b-col>
+        <b-col class="parameter-value">pikachu</b-col>
+      </b-row>
+      <b-row cols="3" align-h="around">
+        <b-col class="parameter-name">Email:</b-col>
+        <b-col class="parameter-value">pikachu@gmail.com</b-col>
+      </b-row>
+      <b-row cols="3" align-h="around"> 
+        <b-col class="parameter-name">Password:</b-col>
+        <b-col class="parameter-value">pikapika</b-col>
+      </b-row>
+    </b-col>
+  </b-row>
 </template>

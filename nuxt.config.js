@@ -1,7 +1,8 @@
 
 export default {
-  // using spa to not have a server running but for actual prod would probably use 'universal'
-  mode: 'spa',
+  // not using the server-side implemented in 'universal'yet but still seems 
+  // the most relevant solution to have fast-loading pages & good SEO
+  mode: 'universal',
   /*
   ** Headers of the page
   */
@@ -41,6 +42,7 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
+    '@nuxtjs/axios'
   ],
   /*
   ** Build configuration

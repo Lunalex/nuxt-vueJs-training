@@ -1,12 +1,12 @@
 <template>
   <div>
     <navbar />
-    <nuxt />
+    <nuxt class="container align-items-start mt-4" />
   </div>
 </template>
 
 <script>
-import Navbar from '~/components/Navbar.vue'
+import Navbar from '~/components/Navbar.vue';
 export default {
   components: {
     Navbar
@@ -76,6 +76,7 @@ html {
   border-radius: 12px;
   padding: 20px 0;
   margin: 5px 5px;
+  min-height: 20vh;
 }
 
 </style>

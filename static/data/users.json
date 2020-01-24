@@ -1,0 +1,46 @@
+[
+    {
+        "id":"usr01",
+        "name":"pikachu",
+        "email":"pikachu@gmail.com",
+        "password":"pikapika",
+        "isClient": false,
+        "admin": true,
+        "accounts": [
+            "Lunatech",
+            "Bouygues",
+            "Ville de Paris"
+        ]
+    },
+    {
+        "id":"usr02",
+        "name":"rondoudou",
+        "email":"rondoudou@gmail.com",
+        "password":"doudou",
+        "isClient": false,
+        "admin": false,
+        "accounts": [
+            "Lunatech",
+            "LVMH",
+            "Amazon"
+        ]
+    },
+    {
+        "id":"usr04",
+        "name":"jimmy",
+        "email":"jimmy@gmail.com",
+        "password":"jim",
+        "isClient": true,
+        "company":"Jimmy&Co Associates",
+        "projects": 3
+    },
+    {
+        "id":"usr04",
+        "name":"frodon",
+        "email":"frodon@gmail.com",
+        "password":"ring",
+        "isClient": false,
+        "company": "Middle-Earth Cie",
+        "projects": 2
+    }
+]

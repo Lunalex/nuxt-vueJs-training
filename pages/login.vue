@@ -1,17 +1,27 @@
 <template>
-    <div class="row justify-content-center">
-        <div class="col-6 text-center">
-            this is the login page
-        </div>
-    </div>
+  <b-row align-h="center">
+    <b-col>
+      <b-row>
+        <b-col align-self="center">
+          <h2>Login</h2>
+        </b-col>
+      </b-row>
+      <b-form @submit="onSubmit">
+          <b-form-group label="Username" label-for="username" label-align="left">
+            <b-input type="text" id="username" required></b-input>
+          </b-form-group>
+          <b-form-group label="Password" label-for="password" label-align="left">
+            <b-input type="password" id="password" required></b-input>
+          </b-form-group>
+        <b-button type="submit" variant="info">Submit</b-button>
+      </b-form>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
-export default {
-    
-}
+export default {};
 </script>
 
 <style>
-
 </style>
