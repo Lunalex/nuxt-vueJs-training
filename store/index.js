@@ -2,15 +2,16 @@ export const state = () => ({
     isConnected: false,
     user_connected: {
         id: '',
-        name: '',
-        email: '',
         isClient: ''
     }
 })
 
 export const getters = {
     connectedUserId(state) {
-        return state.user.id
+        return state.user_connected.id
+    },
+    isConnectedUserClient(state) {
+        return state.user_connected.isClient
     }
 
 }

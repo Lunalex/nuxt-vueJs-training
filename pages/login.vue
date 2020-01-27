@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
   data() {
@@ -32,32 +32,40 @@ export default {
       usersDb: []
     };
   },
-  async mounted() {
-    try {
-      await this.$axios
-        .get("/data/users.json", {
-          Accept: "application/json"
-        })
-        .then(res => {
-          this.usersDb = res.data;
-        });
-    } catch (err) {
-      console.log(err);
-    }
+
+  mounted() {
+    // load before rendering of the page (TBC)
   },
+
   methods: {
+    fetchUsersFromJson() {
+      try {
+        this.$axios
+          .get("/data/users.json", {
+            Accept: "application/json"
+          })
+          .then(res => {
+            this.usersDb = res.data;
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    },
     loginFormSubmit(event) {
       event.preventDefault(); // prevent auto-reload of the page when submitting the form
+      this.fetchUsersFromJson();
       this.usersDb.forEach(user => {
         if (
           user.name == this.loginForm.username &&
           user.password == this.loginForm.password
         ) {
-          console.log("user found!")
-          this.$store.dispatch('connectUser', user)
+          console.log("user found!");
+          let userForStore = user;
+          delete userForStore.password;
+          this.$store.dispatch("connectUser", userForStore);
         }
       });
-      if(this.$store.state.isConnected) {
+      if (this.$store.state.isConnected) {
         console.log("USER CONNECTED!");
       } else {
         console.log("CONNEXION FAILED!");
