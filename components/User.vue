@@ -21,3 +21,11 @@
     </b-col>
   </b-row>
 </template>
+
+<script>
+export default {
+  props() {
+    // catch infos sent from account.vue
+  }
+}
+</script>
