@@ -14,7 +14,9 @@
       </b-row>
       <b-row cols="3" align-h="around"> 
         <b-col class="parameter-name">Password:</b-col>
-        <b-col class="parameter-value">pikapika</b-col>
+        <b-col class="parameter-value">
+          <b-button variant="dark">modify</b-button>
+        </b-col>
       </b-row>
     </b-col>
   </b-row>

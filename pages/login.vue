@@ -20,56 +20,53 @@
 </template>
 
 <script>
-// seems that I might not need to import 
+// seems that I might not need to import
 // but simply use $axios as we're usign Nuxt
 // to investigate...
-import axios from 'axios'
+import axios from "axios"
+import { mapState } from 'vuex'
 
 export default {
   data() {
     return {
       loginForm: {
-        username: '',
-        password: ''
+        username: "",
+        password: ""
       },
       usersDb: []
     };
   },
   async mounted() {
     try {
-        await axios
-        .get('/data/users.json', {
-          'Accept': 'application/json'
+      await axios
+        .get("/data/users.json", {
+          Accept: "application/json"
         })
-        .then((res) => { this.usersDb = res })
-      } catch (err) {
-        console.log(err)
-      }
-      console.log(this.usersDb)
+        .then(res => {
+          this.usersDb = res.data;
+        });
+    } catch (err) {
+      console.log(err);
+    }
   },
   methods: {
-    loginFormSubmit: () => {
-      //fetchUsers()
-      if(this.isFormOk) {
-        console.log("CONNECTED! 'connected_user' has been updated in the store");
-      } else {
-        console.log("AUTHENTIFICATION FAILED!")
-      }
-    },
-    // fetchUsers: async () => {
-      
-    // },
-    isFormOk: () => {
-      usersDb.forEach(user => {
-        if(user.name == loginForm.username && user.password == loginForm.password) {
-          return true;
+    loginFormSubmit(event) {
+      event.preventDefault(); // prevent auto-reload of the page when submitting the form
+      this.usersDb.forEach(user => {
+        if (
+          user.name == this.loginForm.username &&
+          user.password == this.loginForm.password
+        ) {
+          console.log("user found!")
+          this.$store.dispatch('connectUser', user)
         }
       });
-      return false;
+      if(this.$store.state.isConnected) {
+        console.log("USER CONNECTED!");
+      } else {
+        console.log("CONNEXION FAILED!");
+      }
     }
   }
 };
 </script>
-
-<style>
-</style>
