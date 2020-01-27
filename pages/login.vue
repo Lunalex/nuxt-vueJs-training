@@ -20,10 +20,6 @@
 </template>
 
 <script>
-// seems that I might not need to import
-// but simply use $axios as we're usign Nuxt
-// to investigate...
-import axios from "axios"
 import { mapState } from 'vuex'
 
 export default {
@@ -38,7 +34,7 @@ export default {
   },
   async mounted() {
     try {
-      await axios
+      await this.$axios
         .get("/data/users.json", {
           Accept: "application/json"
         })
