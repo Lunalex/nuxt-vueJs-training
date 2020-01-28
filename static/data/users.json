@@ -39,7 +39,7 @@
         "name":"frodon",
         "email":"frodon@gmail.com",
         "password":"ring",
-        "isClient": false,
+        "isClient": true,
         "company": "Middle-Earth Cie",
         "projects": 2
     }
