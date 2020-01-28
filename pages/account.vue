@@ -6,9 +6,9 @@
       </b-row>
       <!-- need to add :userData (etc.) to components for display -->
       <b-row cols="1" cols-lg="2" align-h="around" align-v="start">
-        <b-col class="my-3" ><user /></b-col>
-        <b-col class="my-3" ><user-client /></b-col>
-        <b-col class="my-3"><user-collaborator /></b-col>
+        <b-col class="my-3" ><user :user="userData" /></b-col>
+        <b-col class="my-3" v-if="isClient"><user-client :client="clientData" /></b-col>
+        <b-col class="my-3" v-if="isCollab"><user-collaborator :collab="collabData" /></b-col>
       </b-row>
     </b-col>
   </b-row>

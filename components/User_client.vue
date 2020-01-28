@@ -6,11 +6,11 @@
       </b-row>
       <b-row cols="3" align-h="around" align-v="start">
         <b-col class="parameter-name">Company:</b-col>
-        <b-col class="parameter-value">Lunatech</b-col>
+        <b-col class="parameter-value">{{ client.company }}</b-col>
       </b-row>
       <b-row cols="3" align-h="around" align-v="start">
         <b-col class="parameter-name">Projects:</b-col>
-        <b-col class="parameter-value">3</b-col>
+        <b-col class="parameter-value">{{ client.projects }}</b-col>
       </b-row>
     </b-col>
   </b-row>
@@ -18,8 +18,11 @@
 
 <script>
 export default {
-  props() {
-    // catch infos sent from account.vue
+  props: {
+    client: {
+      company: String,
+      projects: Number
+    }
   }
 }
 </script>

@@ -6,14 +6,14 @@
       </b-row>
       <b-row cols="3" align-h="around" align-v="start">
         <b-col class="parameter-name">Admin:</b-col>
-        <b-col class="parameter-value">yes</b-col>
+        <b-col class="parameter-value">{{ collab.admin }}</b-col>
       </b-row>
       <b-row cols="3" align-h="around" align-v="start">
         <b-col class="parameter-name">Accounts:</b-col>
         <b-col class="parameter-value pl-4">
-            <b-row>Lunatech</b-row>
-            <b-row>Bouygues</b-row>
-            <b-row>Ville de Paris</b-row>
+            <b-row v-for="account in collab.accounts" :key="account">
+              {{ account }}
+            </b-row>
         </b-col>
       </b-row>
     </b-col>
@@ -22,8 +22,11 @@
 
 <script>
 export default {
-  props() {
-    // catch infos sent from account.vue
-  }
+  props: {
+    collab: {
+      admin: Boolean,
+      accounts: []
+    }
+}
 }
 </script>
