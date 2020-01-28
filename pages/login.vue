@@ -34,7 +34,7 @@ export default {
   },
 
   mounted() {
-    // load before rendering of the page (TBC)
+    this.fetchUsersFromJson()    
   },
 
   methods: {
@@ -53,7 +53,6 @@ export default {
     },
     loginFormSubmit(event) {
       event.preventDefault(); // prevent auto-reload of the page when submitting the form
-      this.fetchUsersFromJson();
       this.usersDb.forEach(user => {
         if (
           user.name == this.loginForm.username &&
@@ -72,5 +71,5 @@ export default {
       }
     }
   }
-};
+}
 </script>
