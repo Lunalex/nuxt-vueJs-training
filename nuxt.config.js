@@ -44,7 +44,16 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    ['nuxt-fontawesome', {
+      component: 'fontawesome',
+      imports: [
+        {
+          set: '@fortawesome/free-solid-svg-icons',
+          icons: ['faPowerOff'] // import only one icon see https://www.npmjs.com/package/nuxt-fontawesome
+        }
+      ]
+    }]
   ],
   /*
   ** Build configuration
