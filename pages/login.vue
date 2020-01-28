@@ -20,9 +20,18 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from "vuex"
 
 export default {
+  
+  // it's here for safety reasons even though for now when accessing a '/login' typing the url
+  // session is reset thus preventing from isConnected to ever be true when accessing the page
+  middleware({ store, redirect }) {
+      if(store.state.isConnected) {
+        return redirect('/')
+      }
+    },
+  
   data() {
     return {
       loginForm: {
@@ -30,7 +39,7 @@ export default {
         password: ""
       },
       usersDb: []
-    };
+    }
   },
 
   mounted() {
@@ -45,29 +54,28 @@ export default {
             Accept: "application/json"
           })
           .then(res => {
-            this.usersDb = res.data;
-          });
+            this.usersDb = res.data
+          })
       } catch (err) {
-        console.log(err);
+        console.log(err)
       }
     },
     loginFormSubmit(event) {
-      event.preventDefault(); // prevent auto-reload of the page when submitting the form
+      event.preventDefault() // prevent auto-reload of the page when submitting the form
       this.usersDb.forEach(user => {
         if (
           user.name == this.loginForm.username &&
           user.password == this.loginForm.password
         ) {
-          console.log("user found!");
-          let userForStore = user;
-          delete userForStore.password;
-          this.$store.dispatch("connectUser", userForStore);
+          let userForStore = user
+          delete userForStore.password
+          this.$store.dispatch("connectUser", userForStore)
         }
-      });
-      if (this.$store.state.isConnected) {
-        console.log("USER CONNECTED!");
+      })
+      if(this.$store.state.isConnected) {
+        this.$router.push('/')
       } else {
-        console.log("CONNEXION FAILED!");
+        console.log("CONNEXION FAILED!")
       }
     }
   }

@@ -15,7 +15,7 @@
           <n-link to="/account">{{ connectedUserName }}</n-link>
         </b-nav-item>
         <b-nav-item>
-          <a v-on:click="disconnect()"><fontawesome :icon="disconnectIcon" /></a>
+          <div v-on:click="disconnect()"><fontawesome :icon="disconnectIcon" /></div>
         </b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto" v-else>
@@ -48,6 +48,7 @@ export default {
   methods: {
     disconnect() {
       this.$store.dispatch('disconnectUser')
+      this.$router.push('/') // redirect from a method
     }
   }
 

@@ -30,6 +30,13 @@ import User_collaborator from "~/components/User_collaborator.vue";
 import { mapState } from "vuex";
 
 export default {
+  
+  middleware({ store, redirect }) {
+      if(!store.state.isConnected) {
+        return redirect('/login')
+      }
+    },
+
   components: {
     user: User,
     "user-client": User_client,
@@ -51,11 +58,9 @@ export default {
       let userIsConnected = this.$store.state.isConnected;
       if (userIsConnected) {
         this.displayConnectedUser();
-      } else {
-        console.log("user not connected => redirection to login page");
       }
       return userIsConnected;
-    }
+    },
   },
 
   methods: {
