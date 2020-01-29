@@ -8,7 +8,7 @@ export default ({store}) => {
           storage: {
             getItem: key => Cookies.get(key),
             setItem: (key, value) =>
-              Cookies.set(key, value, { expires: 3 }),
+              Cookies.set(key, value, { expires: 3, secure: false }), // set secure to true in prod?
             removeItem: key => Cookies.remove(key)
           }
       })(store)
