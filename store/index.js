@@ -1,14 +1,3 @@
-
-// const persistStatePlugin = store => {
-//     window.sessionStorage.setItem("persistedState", store.state)
-// }
-
-// export const plugins = [persistStatePlugin]
-
-import createPersistedState from 'vuex-persistedstate';
-import * as Cookies from 'js-cookie';
-
-
 export const state = () => ({
     isConnected: false,
     user_connected: {
