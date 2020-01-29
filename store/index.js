@@ -1,9 +1,12 @@
 
-const persistStatePlugin = store => {
-    window.sessionStorage.setItem("persistedState", store.state)
-}
+// const persistStatePlugin = store => {
+//     window.sessionStorage.setItem("persistedState", store.state)
+// }
 
-export const plugins = [persistStatePlugin]
+// export const plugins = [persistStatePlugin]
+
+import createPersistedState from 'vuex-persistedstate';
+import * as Cookies from 'js-cookie';
 
 
 export const state = () => ({
@@ -14,17 +17,16 @@ export const state = () => ({
     }
 })
 
-export const getters = {
-    connectedUserId(state) {
-        return state.user_connected.id
+export const actions = {
+    connectUser(context, user) {
+        context.commit('connectUser', user)
     },
-    connectedUserName(state) {
-        return state.user_connected.name
-    },
-    isConnectedUserClient(state) {
-        return state.user_connected.isClient
+    disconnectUser({ commit }) {
+        // actions must always have 'context' but if one want to use only one 
+        // or few methods of context he can by replacing 'context' by '{ contextMethod1, contextMethod2, ... }'
+        // here we only need the method 'commit' so we specify only '{ commit }'
+        commit('disconnectUser')
     }
-
 }
 
 export const mutations = {
@@ -40,18 +42,18 @@ export const mutations = {
             email: '',
             isClient: ''
         }
-        window.sessionStorage.clear()
     }
 }
 
-export const actions = {
-    connectUser(context, user) {
-        context.commit('connectUser', user)
+export const getters = {
+    connectedUserId(state) {
+        return state.user_connected.id
     },
-    disconnectUser({ commit }) {
-        // actions must always have 'context' but if one want to use only one 
-        // or few methods of context he can by replacing 'context' by '{ contextMethod1, contextMethod2, ... }'
-        // here we only need the method 'commit' so we specify only '{ commit }'
-        commit('disconnectUser')
+    connectedUserName(state) {
+        return state.user_connected.name
+    },
+    isConnectedUserClient(state) {
+        return state.user_connected.isClient
     }
+
 }

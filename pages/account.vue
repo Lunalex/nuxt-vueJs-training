@@ -32,9 +32,9 @@ import { mapState } from "vuex";
 export default {
   
   middleware({ store, redirect }) {
-      if(!store.state.isConnected) {
-        return redirect('/login')
-      }
+      // if(!store.state.isConnected) {
+      //   return redirect('/login')
+      // }
     },
 
   components: {

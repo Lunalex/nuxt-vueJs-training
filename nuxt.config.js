@@ -32,6 +32,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~/plugins/vuexPersist.js', mode: 'client' }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -45,6 +46,7 @@ export default {
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
+    'js-cookie',
     ['nuxt-fontawesome', {
       component: 'fontawesome',
       imports: [
