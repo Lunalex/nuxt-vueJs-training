@@ -10,10 +10,15 @@
           <n-link to="/mickey">Mickey Mouse</n-link>
         </b-nav-item>
       </b-navbar-nav>
-      <b-navbar-nav class="ml-auto">
+      <b-navbar-nav class="ml-auto" v-if="store_isConnected">
         <b-nav-item>
-          <n-link to="/account">My account</n-link>
+          <n-link to="/account">{{ connectedUserName }}</n-link>
         </b-nav-item>
+        <b-nav-item>
+          <div v-on:click="disconnect()"><fontawesome :icon="disconnectIcon" /></div>
+        </b-nav-item>
+      </b-navbar-nav>
+      <b-navbar-nav class="ml-auto" v-else>
         <b-nav-item>
           <n-link to="/login">Login</n-link>
         </b-nav-item>
@@ -21,6 +26,35 @@
     </b-collapse>
   </b-navbar>
 </template>
+
+<script>
+import { mapState } from 'vuex'
+import { faPowerOff } from '@fortawesome/free-solid-svg-icons'
+
+export default {
+
+  computed: {
+    store_isConnected() {
+      return this.$store.state.isConnected
+    },
+    connectedUserName() {
+      return this.$store.getters.connectedUserName
+    },
+    disconnectIcon() {
+      return faPowerOff
+    }
+  },
+
+  methods: {
+    disconnect() {
+      this.$store.dispatch('disconnectUser')
+      this.$router.push('/') // redirect from a method
+    }
+  }
+
+}
+</script>
+
 
 <style>
 .my-navbar a {

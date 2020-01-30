@@ -2,6 +2,8 @@
 export default {
   // not using the server-side implemented in 'universal'yet but still seems 
   // the most relevant solution to have fast-loading pages & good SEO
+  // actually restored the original 'spa' as I was afraid to ahve issues wimply changing the string below... 
+  // not sure what to choose anymore...
   mode: 'spa',
   /*
   ** Headers of the page
@@ -30,6 +32,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~/plugins/vuexPersist.js', mode: 'client' }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -42,7 +45,17 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    'js-cookie',
+    ['nuxt-fontawesome', {
+      component: 'fontawesome',
+      imports: [
+        {
+          set: '@fortawesome/free-solid-svg-icons',
+          icons: ['faPowerOff'] // import only one icon see https://www.npmjs.com/package/nuxt-fontawesome
+        }
+      ]
+    }]
   ],
   /*
   ** Build configuration
