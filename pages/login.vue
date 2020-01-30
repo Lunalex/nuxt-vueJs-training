@@ -4,7 +4,8 @@
       <b-row>
         <b-col align-self="center">
           <h2>Login</h2>
-          <b-form-invalid-feedback class="my-4"
+          <b-form-invalid-feedback
+            class="my-4"
             :force-show="loginForm.noMatchFound"
           >no match found for username and/or password</b-form-invalid-feedback>
         </b-col>
@@ -17,7 +18,11 @@
             v-model="loginForm.username"
             :state="usernameInputValidation"
           ></b-input>
-          <b-form-invalid-feedback class="text-left" :state="usernameInputValidation" v-if="loginForm.username.length == 0">username is required</b-form-invalid-feedback>
+          <b-form-invalid-feedback
+            class="text-left"
+            :state="usernameInputValidation"
+            v-if="loginForm.username.length == 0"
+          >username is required</b-form-invalid-feedback>
         </b-form-group>
         <b-form-group label="Password" label-for="password" label-align="left">
           <b-input
@@ -26,7 +31,11 @@
             v-model="loginForm.password"
             :state="passwordInputValidation"
           ></b-input>
-          <b-form-invalid-feedback class="text-left" :state="passwordInputValidation" v-if="loginForm.password.length == 0">password is required</b-form-invalid-feedback>
+          <b-form-invalid-feedback
+            class="text-left"
+            :state="passwordInputValidation"
+            v-if="loginForm.password.length == 0"
+          >password is required</b-form-invalid-feedback>
         </b-form-group>
         <b-button type="submit" variant="info">Submit</b-button>
       </b-form>
@@ -38,13 +47,13 @@
 import { mapState } from "vuex";
 
 export default {
-  // it's here for safety reasons even though for now when accessing a '/login' typing the url
-  // session is reset thus preventing from isConnected to ever be true when accessing the page
-  middleware({ store, redirect }) {
-    if (store.state.isConnected) {
-      return redirect("/");
-    }
-  },
+  // redirect or this.$router.push("/") doesn't work as the check is done before the state is updated 
+  // same issue on account.vue when no user is connected
+  // middleware({ store, redirect }) {
+  //   if (store.state.isConnected) {
+  //     return redirect("/");
+  //   }
+  // },
 
   data() {
     return {
@@ -74,7 +83,7 @@ export default {
         return null;
       }
       return this.loginForm.password.length > 0 && !this.loginForm.noMatchFound;
-    },
+    }
   },
 
   methods: {
@@ -112,7 +121,7 @@ export default {
         }
         this.loginForm.noMatchFound = true;
       }
-    },
+    }
   }
 };
 </script>
