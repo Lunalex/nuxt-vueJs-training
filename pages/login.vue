@@ -6,7 +6,7 @@
           <h2>Login</h2>
           <b-form-invalid-feedback
             class="my-4"
-            :force-show="loginForm.noMatchFound"
+            :force-show="noMatchFoundDisplay()"
           >no match found for username and/or password</b-form-invalid-feedback>
         </b-col>
       </b-row>
@@ -73,16 +73,13 @@ export default {
 
   computed: {
     usernameInputValidation() {
-      if (!this.loginForm.submitted) {
-        return null;
-      }
-      return this.loginForm.username.length > 0 && !this.loginForm.noMatchFound;
+      return !this.loginForm.submitted || this.loginForm.username.length > 0 && !this.loginForm.noMatchFound ? null : false;
     },
     passwordInputValidation() {
-      if (!this.loginForm.submitted) {
-        return null;
-      }
-      return this.loginForm.password.length > 0 && !this.loginForm.noMatchFound;
+      return !this.loginForm.submitted || this.loginForm.password.length > 0 && !this.loginForm.noMatchFound ? null : false;
+    },
+    noMatchFoundValidation() {
+      return this.loginForm.submitted && (this.loginForm.username.length == 0 || this.loginForm.password.length == 0) ? false : this.loginForm.noMatchFound;
     }
   },
 
@@ -105,7 +102,7 @@ export default {
       this.loginForm.submitted = true;
       this.loginForm.noMatchFound = false;
 
-      if (this.usernameInputValidation && this.passwordInputValidation) {
+      if (this.loginForm.username.length > 0 && this.loginForm.password.length > 0) {
         for (let i = 0; i < this.usersDb.length; i++) {
           let user = this.usersDb[i];
           if (
@@ -121,6 +118,12 @@ export default {
         }
         this.loginForm.noMatchFound = true;
       }
+    },
+    noMatchFoundDisplay() {
+      if(!this.noMatchFoundValidation) {
+        this.loginForm.noMatchFound = false
+      }
+      return this.loginForm.noMatchFound
     }
   }
 };
