@@ -103,15 +103,13 @@ export default {
       this.loginForm.noMatchFound = false;
 
       if (this.loginForm.username.length > 0 && this.loginForm.password.length > 0) {
-        for (let i = 0; i < this.usersDb.length; i++) {
-          let user = this.usersDb[i];
+        for (let user of this.usersDb) {
           if (
             user.name == this.loginForm.username &&
             user.password == this.loginForm.password
           ) {
-            let userForStore = user;
-            delete userForStore.password;
-            this.$store.dispatch("connectUser", userForStore);
+            delete user.password;
+            this.$store.dispatch("connectUser", user);
             this.$router.push("/");
             break;
           }
