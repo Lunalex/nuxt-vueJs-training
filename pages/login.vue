@@ -4,19 +4,30 @@
       <b-row>
         <b-col align-self="center">
           <h2>Login</h2>
-          <div v-if="noMatchWasFound">no match found for username and/or password</div>
+          <b-form-invalid-feedback class="my-4"
+            :force-show="loginForm.noMatchFound"
+          >no match found for username and/or password</b-form-invalid-feedback>
         </b-col>
       </b-row>
       <b-form @submit="loginFormSubmit">
         <b-form-group label="Username" label-for="username" label-align="left">
-          <b-input type="text" id="username" v-model="loginForm.username"></b-input>
+          <b-input
+            type="text"
+            id="username"
+            v-model="loginForm.username"
+            :state="usernameInputValidation"
+          ></b-input>
+          <b-form-invalid-feedback class="text-left" :state="usernameInputValidation" v-if="loginForm.username.length == 0">username is required</b-form-invalid-feedback>
         </b-form-group>
-        <div v-if="usernameIsRequired" class="invalid-feedback">field is required</div>
         <b-form-group label="Password" label-for="password" label-align="left">
-          <b-input type="password" id="password" v-model="loginForm.password"></b-input>
-          <b-form-invalid-feedback :state="validation">field is required</b-form-invalid-feedback>
+          <b-input
+            type="password"
+            id="password"
+            v-model="loginForm.password"
+            :state="passwordInputValidation"
+          ></b-input>
+          <b-form-invalid-feedback class="text-left" :state="passwordInputValidation" v-if="loginForm.password.length == 0">password is required</b-form-invalid-feedback>
         </b-form-group>
-        <div v-if="validateForm.passwordRequired" class="invalid"></div>
         <b-button type="submit" variant="info">Submit</b-button>
       </b-form>
     </b-col>
@@ -40,12 +51,9 @@ export default {
       usersDb: [],
       loginForm: {
         username: "",
-        password: ""
-      },
-      validateForm: {
-        username: false,
-        password: false,
-        matchFound: false
+        password: "",
+        submitted: false,
+        noMatchFound: false
       }
     };
   },
@@ -55,21 +63,18 @@ export default {
   },
 
   computed: {
-    getUsername() {
-      return this.loginForm.username
+    usernameInputValidation() {
+      if (!this.loginForm.submitted) {
+        return null;
+      }
+      return this.loginForm.username.length > 0 && !this.loginForm.noMatchFound;
     },
-    getPassword() {
-      return this.loginForm.password
+    passwordInputValidation() {
+      if (!this.loginForm.submitted) {
+        return null;
+      }
+      return this.loginForm.password.length > 0 && !this.loginForm.noMatchFound;
     },
-    usernameIsRequired() {
-      return this.validateForm.usernameRequired;
-    },
-    passwordIsRequired() {
-      return this.validateForm.passwordRequired;
-    },
-    noMatchWasFound() {
-      return this.validateForm.noMatchFound;
-    }
   },
 
   methods: {
@@ -88,21 +93,10 @@ export default {
     },
     loginFormSubmit(event) {
       event.preventDefault(); // prevent auto-reload of the page when submitting the form
-      this.validateForm.noMatchFound = false
-      
-      if (this.getUsername == "") {
-        this.validateForm.usernameRequired = true;
-      } else {
-        this.validateForm.usernameRequired = false;
-      }
+      this.loginForm.submitted = true;
+      this.loginForm.noMatchFound = false;
 
-      if (this.getPassword == "") {
-        this.validateForm.passwordRequired = true;
-      } else {
-        this.validateForm.passwordRequired = false;
-      }
-
-      if (this.loginForm.username != "" && this.loginForm.password != "") {
+      if (this.usernameInputValidation && this.passwordInputValidation) {
         for (let i = 0; i < this.usersDb.length; i++) {
           let user = this.usersDb[i];
           if (
@@ -116,13 +110,9 @@ export default {
             break;
           }
         }
-        this.validateForm.noMatchFound = true
+        this.loginForm.noMatchFound = true;
       }
-      console.log("validateForm =")
-      console.log("> usernameRequired = " + this.validateForm.usernameRequired)
-      console.log("> passwordRequired = " + this.validateForm.passwordRequired)
-      console.log("> noMatchFound = " + this.validateForm.noMatchFound)
-    }
+    },
   }
 };
 </script>
