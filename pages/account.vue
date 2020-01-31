@@ -6,7 +6,6 @@
           <h2>My Account</h2>
         </b-col>
       </b-row>
-      <!-- need to add :userData (etc.) to components for display -->
       <b-row cols="1" cols-lg="2" align-h="around" align-v="start" v-if="userIsConnected">
         <b-col class="my-3">
           <user :user="userData" />
@@ -31,11 +30,7 @@ import { mapState } from "vuex";
 
 export default {
   
-  middleware({ store, redirect }) {
-      // if(!store.state.isConnected) {
-      //   return redirect('/login')
-      // }
-    },
+  middleware: 'userDisconnectedRedirect',
 
   components: {
     user: User,

@@ -6,7 +6,7 @@
           <h2>Login</h2>
           <b-form-invalid-feedback
             class="my-4"
-            :force-show="noMatchFoundDisplay()"
+            :force-show="noMatchFoundValidation"
           >no match found for username and/or password</b-form-invalid-feedback>
         </b-col>
       </b-row>
@@ -47,13 +47,8 @@
 import { mapState } from "vuex";
 
 export default {
-  // redirect or this.$router.push("/") doesn't work as the check is done before the state is updated 
-  // same issue on account.vue when no user is connected
-  // middleware({ store, redirect }) {
-  //   if (store.state.isConnected) {
-  //     return redirect("/");
-  //   }
-  // },
+
+  middleware: 'userConnectedRedirect',
 
   data() {
     return {
@@ -67,7 +62,7 @@ export default {
     };
   },
 
-  mounted() {
+  created() {
     this.fetchUsersFromJson();
   },
 
@@ -80,6 +75,14 @@ export default {
     },
     noMatchFoundValidation() {
       return this.loginForm.submitted && (this.loginForm.username.length == 0 || this.loginForm.password.length == 0) ? false : this.loginForm.noMatchFound;
+    }
+  },
+
+  watch: {
+    noMatchFoundValidation(val) {
+      if(!val) {
+        this.loginForm.noMatchFound = false
+      }
     }
   },
 
@@ -116,12 +119,6 @@ export default {
         }
         this.loginForm.noMatchFound = true;
       }
-    },
-    noMatchFoundDisplay() {
-      if(!this.noMatchFoundValidation) {
-        this.loginForm.noMatchFound = false
-      }
-      return this.loginForm.noMatchFound
     }
   }
 };
